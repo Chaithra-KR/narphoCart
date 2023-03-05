@@ -1,0 +1,110 @@
+<%-include("../admin/layouts/header.ejs") %>
+
+<section class="col-lg-8 pt-lg-4 pb-4 mb-3">
+    <div class="pt-2 px-4 ps-lg-0 pe-xl-5">
+      <div class="container-fluid" style="display: flex; justify-content: space-between;">
+      <p class="h2 pt-2 pb-4 mb-0  text-center text-sm-start border-bottom">Product management</p>
+      <a style="text-decoration: none; padding-top: 1rem; " class="btn btn-success mb-3" href="/admin/addproduct">Add Product</a>
+      </div>
+      <table class="table" id="product">
+        <% if(typeof message !=="undefined"){ %>
+          <p style="color: green;"><%=message %></p>
+        <% }else if(typeof errormessage !=="undefined"){ %>
+            <p style="color: red;"><%=errormessage %></p>
+            <% } %>
+        <thead>
+          <tr>
+            <th scope="col">SI.no:</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Image</th>
+            <th scope="col">Description</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Status</th>
+            <th scope="col">Price</th>
+            <th scope="col">Product listing</th>
+            <th scope="col">Settings</th>
+          </tr>
+        </thead>
+        
+<%productDatas.forEach(function(productDatas,i){%> 
+
+          <tr>
+            <td><%=i+1%></td>
+            <td><%=productDatas.product %></td>
+            <td><%=productDatas.category.categoryname%></td>
+            <td><img src="/images/<%=productDatas.image[0]%>"></td>
+            <td><%=productDatas.description %></td>
+            <td><%=productDatas.stock %></td>
+            <td><%=productDatas.status%></td>
+            <td><%=productDatas.price %></td>
+            <td>
+            <% if(productDatas.liststatus===true) {%>
+              <form action="/admin/list/<%=productDatas._id %>"id="form" method="post">
+                <small style="color:rgb(0, 255, 0)">listed now</small>
+                <button class="btn btn-primary btn-sm mx-auto mx-sm-0 my-2" type="submit"  id="blockBtn">List</button>
+
+              </form>
+            <%}else{%>
+                <form action="/admin/unlist/<%=productDatas._id %>" method="post">
+                  <small style="color: red;"> Unlisted</small>
+                  <button class="btn btn-success btn-sm mx-auto mx-sm-0 my-2" type="submit"
+                    id="unblockbtn">Unlist</button>
+                </form>
+            <% } %></td>
+            <td ><a style="text-decoration: none; color: rgb(235, 124, 12);" class="ci ci-edit mb-3" href="/admin/editproduct?id=<%=productDatas._id%>">Edit</a>
+                <a style="text-decoration: none; padding-top: 1rem; color: red;" class="ci ci-trash mb-3" onclick="deleteproduct('<%= productDatas._id %>')">Delete</a>
+           </td>
+          </tr>
+        <%}); %>         
+        </tbody>
+      
+      </table>
+    </div>
+</section>
+
+<script>
+  setTimeout(()=>{
+      document.getElementById("notify").remove()
+  },3000)
+
+  function deleteproduct(id) {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.post(`/admin/dropProduct/${id}`).then((result) => {
+          if (result.data) {
+            Swal.fire(
+              "Deleted!",
+              "Your file has been deleted.",
+              "success"
+            ).then(() => {
+              location.reload();
+            });
+          } else {
+            alert("wrong!");
+          }
+        });
+      }
+    });
+  }
+
+
+
+</script>
+<script>
+      $(document).ready( function () {
+    $('#product').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+} );
+</script>
+
+<%-include("../admin/layouts/footer.ejs") %>

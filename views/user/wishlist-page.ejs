@@ -1,0 +1,49 @@
+<%-include("../user/layouts/header.ejs")%>
+<%-include("../user/layouts/personal-header.ejs")%>
+
+<div>
+  <div class="page-title-overlap bg-dark pt-4">
+    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <h1 class="h3 text-light mb-0">Your Wislist</h1>
+    </div>
+  </div>
+
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+            <section class="col-lg-8">
+              <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
+                <h2 class="h6 text-light mb-0">List of your wishlist products</h2><a class="btn btn-outline-primary btn-sm ps-2"><i class="ci-arrow-left me-2"></i>Continue shopping</a>
+              </div>
+            
+                <%wishData.items.forEach((wishData,i)=>{%> 
+                    <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom">
+                      <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
+                        <div class="fs-sm"><img src="/images/<%=wishData.product.image%>"></div>
+                        <div class="pt-2">
+                          <h3 class="product-title fs-base mb-2"><a href=""><%=wishData.product.product%></h3>
+                          <div class="fs-sm"><span class="text-muted me-2"><%=wishData.product.description%></div>
+                          <div class="fs-lg text-accent pt-2"><%=wishData.product.price%></div>
+                        </div>
+                      </div>
+                      <!-- <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start" style="max-width: 9rem;">
+                        <label class="form-label" for="quantity1">Quantity</label>
+                        <form action="/qtyinc/< %=wishData._id%>" method="post"><button>+</button></form>
+                        <scan style="color: black;">< %=accessUserdata.quantity%></scan>
+                        <form action="/qtydec/< %=accessUserdata._id%>" method="post"><button>-</button></form>
+                        <div class="d-flex ">
+                        
+                        <br>
+                      </div> -->
+                      <!-- <form action="/Itemdelete?id< %=accessUserdata._id %>" method="post">
+                        <button class="btn btn-link px-0 text-danger" type="submit"><i class="ci-close-circle me-2"></i><span class="fs-sm">Remove</span></button>
+                      </form> -->
+                      </div>
+                    </div>
+                  <%})%>
+                <!-- <a href="/cart "> <button class="btn btn-outline-accent d-block w-100 mt-4" type="button" ><i class="ci-loading fs-base me-2"></i>Refresh cart</button></a> -->
+
+      </div>
+    </div>
+</div>
+      
+<%-include("../user/layouts/footer.ejs")%>

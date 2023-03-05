@@ -1,0 +1,42 @@
+<%-include("../user/layouts/header.ejs")%>
+<%-include("../user/layouts/personal-header.ejs")%>
+
+
+         <section class="col-lg-8">
+                <!-- address page --> 
+                        <div class="bg-secondary rounded-3 p-4 mb-4">
+                          <h6>Your address list</h6> 
+                        </div>
+                    <div style="display: flex;justify-content: end;">
+
+                           <a class="btn btn-success" href="/createaddress">add address</a>
+                    </div>
+                <table class="table table-hover mb-0">
+                    <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%userDatas.address.forEach((val)=>{%>
+                    <tr>
+                        <td class="py-3 align-middle">
+                            <p id="p"><b> <%=val.name%>
+                        </b>,&nbsp;<%=val.phone +', '+ val.houseName +' , ' +val.pin+' ,'+ val.city +','
+                                +val.district+', '+val.state%></p>
+                        </td>
+                        <td  class="py-3 align-middle">
+                        <form action="/deleteaddress/<%= val._id %>" method="post">
+                            <button class="btn bg-faded-danger btn-icon" type="submit" data-bs-toggle="tooltip" title="Delete"><i class="ci-trash text-danger"></i></button>
+                        </form>
+                    </td>
+                    </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+                </section>
+            </div>
+        </div>  
+</div>
+<%-include("../user/layouts/footer.ejs")%>

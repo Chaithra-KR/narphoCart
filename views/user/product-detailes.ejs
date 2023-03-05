@@ -1,0 +1,79 @@
+<%-include("../user/layouts/header.ejs") %>
+
+<div>
+
+  <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+          <h1 class="h3 text-light mb-2"><%=productDatas.product%></h1>
+        </div>
+      </div>
+  </div>
+
+  <div class="container">
+    <div class="bg-light shadow-lg rounded-3">
+      
+      <div class="px-4 pt-lg-3 pb-3 mb-5">
+        <div class="tab-content px-lg-3">
+          <!-- General info tab-->
+          <div class="tab-pane fade show active" id="general" role="tabpanel">
+            <div class="row">
+              <!-- Product gallery-->
+              <div class="col-lg-7 pe-lg-0">
+                <div class="product-gallery">
+                  <div class="product-gallery-preview order-sm-2">
+                    <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="images/<%=productDatas.image[0]%>"  data-zoom="/images/<%=productDatas.image[0] %>"  alt=" product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="images/<%=productDatas.image[1] %>" data-zoom="/images/<%=productDatas.image[1] %>" alt="product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="images/<%=productDatas.image[2] %>"  data-zoom="/images/<%=productDatas.image[2] %>"  alt="product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                    <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="images/<%=productDatas.image[3] %>" data-zoom="/images/<%=productDatas.image[3] %>"  alt="product image">
+                      <div class="image-zoom-pane"></div>
+                    </div>
+                  </div>
+                  <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="/images/<%=productDatas.image [0]%>"  alt="product image"></a>
+                    <a class="product-gallery-thumblist-item" href="#second"><img src="images/<%=productDatas.image[1] %>"  alt="<%=productDatas.image %>"></a>
+                    <a class="product-gallery-thumblist-item" href="#third"><img src="images/<%=productDatas.image[2] %>"  alt="<%=productDatas.image %>"></a>
+                    <a class="product-gallery-thumblist-item" href="#fourth"><img src="images/<%=productDatas.image[3] %>"  alt="<%=productDatas.image %>"></a></div>
+                </div>
+              </div>
+              <!-- Product details-->
+              <div class="col-lg-5 pt-4 pt-lg-0">
+                <div class="product-details ms-auto pb-3">
+                  <div class="h3 fw-normal text-accent mb-3 me-1"><small>Rs.</small><%=productDatas.price %><small>/-</small></div>
+                  <div class="position-relative me mb-3">
+                    <div class="product-badge product-available bg-warning mt-n1"><i class="ci-security-check"></i><%=productDatas.status %></div>
+                  </div><br>
+                  <div class="d-flex align-items-center pt-2 pb-4">
+                    <a class="btn btn-secondary d-block w-50" type="button" href="/addwish?id=<%=productDatas._id%>"><i class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Add to Wishlist</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="quantity">Quantity:</label>&nbsp;
+                    <input type="number" id="quantity" name="quantity" min="1" max="100" >
+                  </div>
+
+                  <div>
+                    <p>Category: <%=productDatas.category.categoryname %></p>
+                    <p>Product ID: <%=productDatas._id %></p>
+                    <p type="textarea"><b>Product detailes</b><br><%=productDatas.description %></p>
+                    <p>Stock available: <%=productDatas.stock %></p>
+                  </div>
+                  
+                  <center><button class="btn btn-light btn-shadow d-block w-20 " type="button"><i class=" ci-share fs-lg me-2"></i>Share</button></center><br>
+                  <div class="d-flex mb-4 w-150" style="display: inline;">
+                    <a class="btn btn-primary btn-shadow d-block w-50 " type="button" href="/addcart?id=<%=productDatas._id %>"><i class="ci-cart fs-lg me-2"></i>Add to Cart</a>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-success btn-shadow d-block w-50 " type="button"><i class=" ci-arrow-right fs-lg me-2"></i>Buy Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%-include("../user/layouts/footer.ejs") %>
